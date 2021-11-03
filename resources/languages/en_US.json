@@ -1,0 +1,9 @@
+{
+  "email": "Email",
+  "password": "Password",
+  "confirm-password": "Confirmar Senha",
+  "enter": "Sing In",
+  "dont-have-account-register": "Ainda não tem conta? Criar!",
+  "invalid-email": "Email Inválido",
+  "invalid-password": "Senha Inválida (Mínimo 6 digitos)"
+}
