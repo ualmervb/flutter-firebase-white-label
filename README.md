@@ -1,6 +1,6 @@
 # Flutter Authentication with Firebase
 
-A new Flutter project.
+Flutter project created to explore the integration with Firebase Authentication and other functionalities using Firestore Database.
 
 ## Getting Started
 
