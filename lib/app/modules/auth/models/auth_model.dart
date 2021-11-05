@@ -7,4 +7,5 @@ abstract class AuthModel {
   Future<void> signOut();
   Future<void> resendEmailVerification();
   Future<void> sendPasswordResetEmail(String email);
+  Future<UserEntity?> signInWithGoogle();
 }

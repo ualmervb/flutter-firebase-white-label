@@ -22,6 +22,10 @@ String getErrorString(String code){
       return 'ERROR_OPERATION_NOT_ALLOWED'.i18n();
     case 'network-request-failed':
       return 'network-request-failed'.i18n();
+    case 'account-exists-with-different-credential':
+      return 'account-exists-with-different-credential'.i18n();
+    case 'invalid-credential':
+      return 'invalid-credential'.i18n();
 
     default:
       return 'undefined-error'.i18n();

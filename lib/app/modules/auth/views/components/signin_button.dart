@@ -5,7 +5,7 @@ enum SignInButtonType {FACEBOOK, GOOGLE}
 
 class SignInButton extends StatelessWidget {
 
-  final Function onPressed;
+  final Function() onPressed;
   final String text;
   final bool loading;
   final SignInButtonType signInButtonType;
@@ -34,7 +34,7 @@ class SignInButton extends StatelessWidget {
       ),
       child: this.loading
           ? CircularProgressIndicator(
-        valueColor: AlwaysStoppedAnimation(Colors.white),
+        valueColor: AlwaysStoppedAnimation(Colors.black54),
       )
           :  Row(
         mainAxisSize: MainAxisSize.min,
@@ -56,7 +56,7 @@ class SignInButton extends StatelessWidget {
           )
         ],
       ),
-      onPressed: (){},
+      onPressed: this.onPressed,
     );
   }
 
@@ -94,7 +94,7 @@ class SignInButton extends StatelessWidget {
           )
         ],
       ),
-      onPressed: (){},
+      onPressed: this.onPressed,
     );
   }
 }

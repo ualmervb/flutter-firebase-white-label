@@ -84,6 +84,21 @@ mixin _$SignInStore on _SignInStoreBase, Store {
     });
   }
 
+  final _$loadingGoogleAtom = Atom(name: '_SignInStoreBase.loadingGoogle');
+
+  @override
+  bool get loadingGoogle {
+    _$loadingGoogleAtom.reportRead();
+    return super.loadingGoogle;
+  }
+
+  @override
+  set loadingGoogle(bool value) {
+    _$loadingGoogleAtom.reportWrite(value, super.loadingGoogle, () {
+      super.loadingGoogle = value;
+    });
+  }
+
   final _$signInErrorAtom = Atom(name: '_SignInStoreBase.signInError');
 
   @override
@@ -136,6 +151,14 @@ mixin _$SignInStore on _SignInStoreBase, Store {
   Future<void> signInWithEmailAndPassword() {
     return _$signInWithEmailAndPasswordAsyncAction
         .run(() => super.signInWithEmailAndPassword());
+  }
+
+  final _$signInWithGoogleAsyncAction =
+      AsyncAction('_SignInStoreBase.signInWithGoogle');
+
+  @override
+  Future<void> signInWithGoogle() {
+    return _$signInWithGoogleAsyncAction.run(() => super.signInWithGoogle());
   }
 
   final _$_SignInStoreBaseActionController =
@@ -236,6 +259,7 @@ email: ${email},
 password: ${password},
 passwordVisible: ${passwordVisible},
 loading: ${loading},
+loadingGoogle: ${loadingGoogle},
 signInError: ${signInError},
 emailError: ${emailError},
 passwordError: ${passwordError},

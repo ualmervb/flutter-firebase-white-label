@@ -43,6 +43,9 @@ abstract class _SignInStoreBase with Store {
   bool loading = false;
 
   @observable
+  bool loadingGoogle = false;
+
+  @observable
   String signInError = "";
 
   @action
@@ -103,6 +106,23 @@ abstract class _SignInStoreBase with Store {
       loading = false;
       setSignInError(getErrorString(e.code));
     }
-    ;
+  }
+  @action
+  Future<void> signInWithGoogle() async {
+    loadingGoogle = false;
+    print("teste");
+
+    try{
+      loadingGoogle = true;
+
+      UserEntity? _user =  await _authModel.signInWithGoogle();
+
+      loadingGoogle = false;
+
+    } on FirebaseAuthException catch (e) {
+      loadingGoogle = false;
+      setSignInError(getErrorString(e.code));
+    }
+
   }
 }

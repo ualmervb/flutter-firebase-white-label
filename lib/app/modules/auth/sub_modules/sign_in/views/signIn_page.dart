@@ -40,7 +40,6 @@ class SignInPageState extends State<SignInPage> {
         signInStore.validatePassword();
       }
     });
-
   }
 
   @override
@@ -53,173 +52,183 @@ class SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:Padding(
+      body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: Center(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Observer(
-                            builder: (_) {
-                              return TextField(
-                                keyboardType: TextInputType.emailAddress,
-                                onChanged: signInStore.setEmail,
-                                enabled: !signInStore.loading,
-                                focusNode: _focusEmail,
-                                onEditingComplete: signInStore.validateEmail,
-                                onSubmitted: (_){
-                                  signInStore.validateEmail();
-                                },
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  errorText: signInStore.emailError,
-                                  labelText: 'email'.i18n().toUpperCase(),
-                                  prefixIcon: Icon(Icons.account_circle),
-                                ),
-                                textAlignVertical: TextAlignVertical.center,
-                              );
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Observer(
+                        builder: (_) {
+                          return TextField(
+                            keyboardType: TextInputType.emailAddress,
+                            onChanged: signInStore.setEmail,
+                            enabled: !signInStore.loading,
+                            focusNode: _focusEmail,
+                            onEditingComplete: signInStore.validateEmail,
+                            onSubmitted: (_) {
+                              signInStore.validateEmail();
                             },
-                          ),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          Observer(
-                            builder: (_) {
-                              return TextField(
-                                obscureText: !signInStore.passwordVisible,
-                                onChanged: signInStore.setPassword,
-                                enabled: !signInStore.loading,
-                                focusNode: _focusPassword,
-                                onEditingComplete: signInStore.validatePassword,
-                                onSubmitted: (_){
-                                  signInStore.validatePassword();
-                                },
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    errorText: signInStore.passwordError,
-                                    labelText: "password".i18n().toUpperCase(),
-                                    prefixIcon: Icon(Icons.lock),
-                                    suffixIcon: ClipRRect(
-                                      borderRadius: BorderRadius.circular(32),
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        child: InkWell(
-                                          child: Icon(
-                                            signInStore.passwordVisible
-                                                ? Icons.visibility_off
-                                                : Icons.visibility,
-                                          ),
-                                          onTap: signInStore.togglePasswordVisibility,
-                                        ),
-                                      ),
-                                    )),
-                                textAlignVertical: TextAlignVertical.center,
-                              );
-                            },
-                          ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: () {
-                                Modular.to.pushNamed("/auth/passwordReset");
-                              },
-                              style: ButtonStyle(
-                                padding: MaterialStateProperty.all<EdgeInsets>(
-                                    EdgeInsets.only(right: 5)),
-                              ),
-                              child: Text('reset-password'.i18n().toUpperCase(),),
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              errorText: signInStore.emailError,
+                              labelText: 'email'.i18n().toUpperCase(),
+                              prefixIcon: Icon(Icons.account_circle),
                             ),
-                          ),
-                        ],
+                            textAlignVertical: TextAlignVertical.center,
+                          );
+                        },
                       ),
-                    ),
-                  ),
-                ),
-
-                Observer(
-                  builder: (_) {
-                    return ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Observer(
+                        builder: (_) {
+                          return TextField(
+                            obscureText: !signInStore.passwordVisible,
+                            onChanged: signInStore.setPassword,
+                            enabled: !signInStore.loading,
+                            focusNode: _focusPassword,
+                            onEditingComplete: signInStore.validatePassword,
+                            onSubmitted: (_) {
+                              signInStore.validatePassword();
+                            },
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                errorText: signInStore.passwordError,
+                                labelText: "password".i18n().toUpperCase(),
+                                prefixIcon: Icon(Icons.lock),
+                                suffixIcon: ClipRRect(
+                                  borderRadius: BorderRadius.circular(32),
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      child: Icon(
+                                        signInStore.passwordVisible
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                      ),
+                                      onTap:
+                                          signInStore.togglePasswordVisibility,
+                                    ),
+                                  ),
+                                )),
+                            textAlignVertical: TextAlignVertical.center,
+                          );
+                        },
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {
+                            Modular.to.pushNamed("/auth/passwordReset");
+                          },
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all<EdgeInsets>(
+                                EdgeInsets.only(right: 5)),
                           ),
-                          primary: Theme.of(context).primaryColor,
-                          shadowColor:
-                              Theme.of(context).primaryColor.withAlpha(100),
+                          child: Text(
+                            'reset-password'.i18n().toUpperCase(),
+                          ),
                         ),
-                        child: signInStore.loading
-                            ? CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation(Colors.white),
-                              )
-                            :  Text(
-                                'sign-in'.i18n().toUpperCase(),
-                                style:
-                                    TextStyle(color: Colors.white),
-                              ),
-                        onPressed: signInStore.isFormValid
-                            ? () async {
-                                await signInStore.signInWithEmailAndPassword();
-                                if (signInStore.signInError != "") {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    content: Text(
-                                        '${signInStore.signInError}'),
-                                    backgroundColor: Colors.red,
-                                    duration: Duration(milliseconds: 6000),
-                                  ));
-                                }
-                              }
-                            : null,
-                      );
-                  },
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.45,
-                    child: SignInButton(
-                      onPressed: (){},
-                      text: "sign-in-with-google".i18n().toUpperCase(),
-                      loading: false,
-                      signInButtonType: SignInButtonType.GOOGLE,
-                    ),
+                      ),
+                    ],
                   ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.02,
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      child: SignInButton(
-                        onPressed: (){},
-                        text: "sign-in-with-facebook".i18n().toUpperCase(),
-                        loading: false,
-                        signInButtonType: SignInButtonType.FACEBOOK,
-                      ),
-                    ),
-                  ],
                 ),
-                Align(
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    onPressed: () {
-                      Modular.to.pushReplacementNamed("/auth/signUp");
-                    },
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all<EdgeInsets>(
-                          EdgeInsets.only(right: 5)),
+              ),
+            ),
+            Observer(
+              builder: (_) {
+                return ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    child: Text("dont-have-account-register".i18n().toUpperCase(),
-                      ),
+                    primary: Theme.of(context).primaryColor,
+                    shadowColor: Theme.of(context).primaryColor.withAlpha(100),
+                  ),
+                  child: signInStore.loading
+                      ? CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(Colors.white),
+                        )
+                      : Text(
+                          'sign-in'.i18n().toUpperCase(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                  onPressed: signInStore.isFormValid
+                      ? () async {
+                          await signInStore.signInWithEmailAndPassword();
+                          if (signInStore.signInError != "") {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('${signInStore.signInError}'),
+                              backgroundColor: Colors.red,
+                              duration: Duration(milliseconds: 6000),
+                            ));
+                          }
+                        }
+                      : null,
+                );
+              },
+            ),
+            Row(
+              children: [
+                Observer(builder: (_) {
+                  return SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.45,
+                    child: SignInButton(
+                      text: "sign-in-with-google".i18n().toUpperCase(),
+                      loading: signInStore.loadingGoogle,
+                      signInButtonType: SignInButtonType.GOOGLE,
+                      onPressed: () async {
+                        await signInStore.signInWithGoogle();
+                        if (signInStore.signInError != "") {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('${signInStore.signInError}'),
+                            backgroundColor: Colors.red,
+                            duration: Duration(milliseconds: 6000),
+                          ));
+                        }
+                      },
+                    ),
+                  );
+                }),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.02,
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  child: SignInButton(
+                    onPressed: () {},
+                    text: "sign-in-with-facebook".i18n().toUpperCase(),
+                    loading: false,
+                    signInButtonType: SignInButtonType.FACEBOOK,
                   ),
                 ),
               ],
             ),
+            Align(
+              alignment: Alignment.center,
+              child: TextButton(
+                onPressed: () {
+                  Modular.to.pushReplacementNamed("/auth/signUp");
+                },
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all<EdgeInsets>(
+                      EdgeInsets.only(right: 5)),
+                ),
+                child: Text(
+                  "dont-have-account-register".i18n().toUpperCase(),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

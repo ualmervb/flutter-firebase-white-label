@@ -44,8 +44,12 @@ class AuthModelImpl with AuthModel {
 
   @override
   Future<void> sendPasswordResetEmail(String email) {
-    print(email);
     return _authRepository.sendPasswordResetEmail(email);
+  }
+
+  @override
+  Future<UserEntity?> signInWithGoogle() {
+    return _authRepository.signInWithGoogle();
   }
 
 }
