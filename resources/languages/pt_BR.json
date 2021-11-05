@@ -31,5 +31,7 @@
   "resend-email": "Reenviar E-mail",
   "confirm": "Confirmar",
   "confirm-reset-password": "Confirmar reinício de Senha",
-  "confirm-instruction-reset-password": "Ao prosseguir, você receberá um e-mail com o link para alterar sua senha nos próximos minutos. Verifique também a caixa de spam"
+  "confirm-instruction-reset-password": "Ao prosseguir, você receberá um e-mail com o link para alterar sua senha nos próximos minutos. Verifique também a caixa de spam",
+  "sign-in-with-facebook": "Facebook",
+  "sign-in-with-google": "Google"
 }

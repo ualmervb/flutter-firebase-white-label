@@ -39,6 +39,7 @@ dependencies:
   flutter_mobx: ^2.0.2
   localization: ^1.1.0
   brasil_fields: ^1.2.0
+  flutter_signin_button: ^2.0.0
 
 dev_dependencies:
   modular_test: ^1.0.1+1
@@ -62,7 +63,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - resources/languages/
-  #   - images/a_dot_ham.jpeg
+     - resources/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

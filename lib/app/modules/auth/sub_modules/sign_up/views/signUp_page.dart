@@ -1,5 +1,6 @@
 import 'package:flutter_firebase_white_label/app/modules/auth/sub_modules/sign_up/controllers/signUp_store.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_firebase_white_label/app/modules/auth/views/components/signin_button.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
@@ -74,20 +75,20 @@ class SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Card(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          elevation: 16,
-          child: ListView(
-            padding: const EdgeInsets.all(16),
-            shrinkWrap: true,
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child:  Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(
-                height: 16,
-              ),
+
+        Expanded(
+        child: Center(
+        child: SingleChildScrollView(
+        child: Column(
+        children: [
+
               Observer(
                 builder: (_) {
                   return TextField(
@@ -99,6 +100,7 @@ class SignUpPageState extends State<SignUpPage> {
                       signUpStore.validateName();
                     },
                     decoration: InputDecoration(
+                      border: OutlineInputBorder(),
                       errorText: signUpStore.nameError,
                       labelText: 'name'.i18n().toUpperCase(),
                       prefixIcon: Icon(Icons.account_circle),
@@ -122,6 +124,7 @@ class SignUpPageState extends State<SignUpPage> {
                       signUpStore.validatePhone();
                     },
                     decoration: InputDecoration(
+                      border: OutlineInputBorder(),
                       errorText: signUpStore.phoneError,
                       labelText: 'phone'.i18n().toUpperCase(),
                       prefixIcon: Icon(Icons.account_circle),
@@ -146,6 +149,7 @@ class SignUpPageState extends State<SignUpPage> {
                       signUpStore.validateEmail();
                     },
                     decoration: InputDecoration(
+                      border: OutlineInputBorder(),
                       errorText: signUpStore.emailError,
                       labelText: 'email'.i18n().toUpperCase(),
                       prefixIcon: Icon(Icons.account_circle),
@@ -169,6 +173,7 @@ class SignUpPageState extends State<SignUpPage> {
                       signUpStore.validatePassword();
                     },
                     decoration: InputDecoration(
+                        border: OutlineInputBorder(),
                         errorText: signUpStore.passwordError,
                         labelText: "password".i18n().toUpperCase(),
                         prefixIcon: Icon(Icons.lock),
@@ -190,6 +195,9 @@ class SignUpPageState extends State<SignUpPage> {
                   );
                 },
               ),
+              const SizedBox(
+                height: 16,
+              ),
               Observer(
                 builder: (_) {
                   return TextField(
@@ -202,6 +210,7 @@ class SignUpPageState extends State<SignUpPage> {
                       signUpStore.validateConfirmPassword();
                     },
                     decoration: InputDecoration(
+                        border: OutlineInputBorder(),
                         errorText: signUpStore.confirmPasswordError,
                         labelText: "confirm-password".i18n().toUpperCase(),
                         prefixIcon: Icon(Icons.lock),
@@ -223,17 +232,17 @@ class SignUpPageState extends State<SignUpPage> {
                   );
                 },
               ),
-              const SizedBox(
-                height: 16,
-              ),
+        ]
+    )
+    )
+    )
+        ),
               Observer(
                 builder: (_) {
-                  return SizedBox(
-                    height: 44,
-                    child: ElevatedButton(
+                  return ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(32),
+                          borderRadius: BorderRadius.circular(5),
                         ),
                         primary: Theme.of(context).primaryColor,
                         shadowColor:
@@ -246,7 +255,7 @@ class SignUpPageState extends State<SignUpPage> {
                           :  Text(
                         'sign-up'.i18n().toUpperCase(),
                         style:
-                        TextStyle(color: Colors.white, fontSize: 18),
+                        TextStyle(color: Colors.white),
                       ),
                       onPressed: signUpStore.isFormValid
                           ? () async {
@@ -262,12 +271,33 @@ class SignUpPageState extends State<SignUpPage> {
                         }
                       }
                           : null,
-                    ),
-                  );
+                    );
                 },
               ),
-              const SizedBox(
-                height: 32,
+              Row(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.45,
+                    child: SignInButton(
+                      onPressed: (){},
+                      text: "sign-in-with-google".i18n().toUpperCase(),
+                      loading: false,
+                      signInButtonType: SignInButtonType.GOOGLE,
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.02,
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.45,
+                    child: SignInButton(
+                      onPressed: (){},
+                      text: "sign-in-with-facebook".i18n().toUpperCase(),
+                      loading: false,
+                      signInButtonType: SignInButtonType.FACEBOOK,
+                    ),
+                  ),
+                ],
               ),
               Align(
                 alignment: Alignment.center,
@@ -280,13 +310,11 @@ class SignUpPageState extends State<SignUpPage> {
                         EdgeInsets.only(right: 5)),
                   ),
                   child: Text('already-have-account'.i18n().toUpperCase(),
-                    style:
-                    TextStyle(fontSize: 18),),
+                    ),
                 ),
               ),
             ],
           ),
-        ),
       ),
     );
   }
