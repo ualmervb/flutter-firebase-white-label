@@ -119,6 +119,13 @@ abstract class _SignInStoreBase with Store {
 
       loadingGoogle = false;
 
+      _authStore.setUserModel(_user!);
+      if(_user.emailVerified!){
+        Modular.to.pushReplacementNamed("/home/");
+      }else{
+        Modular.to.pushReplacementNamed("/auth/notEmailVerifying");
+      }
+
     } on FirebaseAuthException catch (e) {
       loadingGoogle = false;
       setSignInError(getErrorString(e.code));

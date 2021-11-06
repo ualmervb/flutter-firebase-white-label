@@ -91,10 +91,6 @@ class AuthFirebaseRepositoryImpl with AuthRepository{
 
     UserEntity? currentUser;
     if (currentUserFirebase != null) {
-      currentUserFirebase.sendEmailVerification();
-      print(currentUserFirebase.uid);
-      print(currentUserFirebase.email);
-      print(currentUserFirebase.emailVerified);
       currentUser = UserEntity(
           id: currentUserFirebase.uid,
           email: currentUserFirebase.email,
