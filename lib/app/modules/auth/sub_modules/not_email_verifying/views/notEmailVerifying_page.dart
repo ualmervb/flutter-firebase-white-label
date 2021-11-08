@@ -55,11 +55,11 @@ class NotEmailVerifyingPageState extends State<NotEmailVerifyingPage> {
                 return Padding(
                   padding: const EdgeInsets.all(16),
                   child: SizedBox(
-                    height: 44,
+                    height: 50,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(32),
+                          borderRadius: BorderRadius.circular(5),
                         ),
                         primary: Theme.of(context).primaryColor,
                         shadowColor:

@@ -239,45 +239,53 @@ class SignUpPageState extends State<SignUpPage> {
         ),
               Observer(
                 builder: (_) {
-                  return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
+                  return SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          primary: Theme.of(context).primaryColor,
+                          shadowColor:
+                          Theme.of(context).primaryColor.withAlpha(100),
                         ),
-                        primary: Theme.of(context).primaryColor,
-                        shadowColor:
-                        Theme.of(context).primaryColor.withAlpha(100),
-                      ),
-                      child: signUpStore.loading
-                          ? CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation(Colors.white),
-                      )
-                          :  Text(
-                        'sign-up'.i18n().toUpperCase(),
-                        style:
-                        TextStyle(color: Colors.white),
-                      ),
-                      onPressed: signUpStore.isFormValid
-                          ? () async {
-                        await signUpStore.signUp();
-                        if (signUpStore.signUpError != "") {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(SnackBar(
-                            content: Text(
-                                '${signUpStore.signUpError}'),
-                            backgroundColor: Colors.red,
-                            duration: Duration(milliseconds: 6000),
-                          ));
+                        child: signUpStore.loading
+                            ? CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(Colors.white),
+                        )
+                            :  Text(
+                          'sign-up'.i18n().toUpperCase(),
+                          style:
+                          TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                        onPressed: signUpStore.isFormValid
+                            ? () async {
+                          await signUpStore.signUp();
+                          if (signUpStore.signUpError != "") {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(SnackBar(
+                              content: Text(
+                                  '${signUpStore.signUpError}'),
+                              backgroundColor: Colors.red,
+                              duration: Duration(milliseconds: 6000),
+                            ));
+                          }
                         }
-                      }
-                          : null,
-                    );
+                            : null,
+                      ),
+                  );
                 },
+              ),
+              const SizedBox(
+                height: 16,
               ),
               Row(
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.45,
+                    width: (MediaQuery.of(context).size.width - 48) * 0.5,
+                    height: 50,
                     child: SignInButton(
                       onPressed: (){},
                       text: "sign-in-with-google".i18n().toUpperCase(),
@@ -285,11 +293,12 @@ class SignUpPageState extends State<SignUpPage> {
                       signInButtonType: SignInButtonType.GOOGLE,
                     ),
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.02,
+                  const SizedBox(
+                    width: 16,
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.45,
+                    width: (MediaQuery.of(context).size.width - 48) * 0.5,
+                    height: 50,
                     child: SignInButton(
                       onPressed: (){},
                       text: "sign-in-with-facebook".i18n().toUpperCase(),
@@ -310,6 +319,7 @@ class SignUpPageState extends State<SignUpPage> {
                         EdgeInsets.only(right: 5)),
                   ),
                   child: Text('already-have-account'.i18n().toUpperCase(),
+                    style: TextStyle(fontSize: 18),
                     ),
                 ),
               ),

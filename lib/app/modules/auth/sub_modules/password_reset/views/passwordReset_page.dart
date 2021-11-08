@@ -86,6 +86,7 @@ class PasswordResetPageState extends State<PasswordResetPage> {
                             passwordResetStore.validateEmail();
                           },
                           decoration: InputDecoration(
+                            border: OutlineInputBorder(),
                             errorText: passwordResetStore.emailError,
                             labelText: 'email'.i18n().toUpperCase(),
                             prefixIcon: Icon(Icons.account_circle),
@@ -101,11 +102,11 @@ class PasswordResetPageState extends State<PasswordResetPage> {
             Observer(
               builder: (_) {
                 return SizedBox(
-                  height: 44,
+                  height: 50,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       primary: Theme.of(context).primaryColor,
                       shadowColor:
@@ -163,11 +164,11 @@ class PasswordResetPageState extends State<PasswordResetPage> {
                   ),
                   SizedBox(
                     width: double.infinity,
-                    height: 44,
+                    height: 50,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(32),
+                          borderRadius: BorderRadius.circular(5),
                         ),
                         primary: Theme.of(context).primaryColor,
                         shadowColor:

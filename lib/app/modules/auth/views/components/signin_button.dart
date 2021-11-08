@@ -28,13 +28,13 @@ class SignInButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
         ),
-        primary: Colors.white,
+        primary: Colors.black54,
         shadowColor:
         Theme.of(context).primaryColor.withAlpha(100),
       ),
       child: this.loading
           ? CircularProgressIndicator(
-        valueColor: AlwaysStoppedAnimation(Colors.black54),
+        valueColor: AlwaysStoppedAnimation(Colors.white),
       )
           :  Row(
         mainAxisSize: MainAxisSize.min,
@@ -49,8 +49,8 @@ class SignInButton extends StatelessWidget {
             child: Text(
               this.text,
               style: TextStyle(
-                  color: Colors.black54,
-                  overflow: TextOverflow.ellipsis
+                  color: Colors.white,
+                  overflow: TextOverflow.ellipsis, fontSize: 18
               ),
             ),
           )
@@ -88,7 +88,7 @@ class SignInButton extends StatelessWidget {
               this.text,
               style: TextStyle(
                   color: Colors.white,
-                  overflow: TextOverflow.ellipsis
+                  overflow: TextOverflow.ellipsis, fontSize: 18
               ),
             ),
           )

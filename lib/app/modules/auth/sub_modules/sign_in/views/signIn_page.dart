@@ -135,6 +135,7 @@ class SignInPageState extends State<SignInPage> {
                           ),
                           child: Text(
                             'reset-password'.i18n().toUpperCase(),
+                            style: TextStyle(fontSize: 18),
                           ),
                         ),
                       ),
@@ -145,42 +146,50 @@ class SignInPageState extends State<SignInPage> {
             ),
             Observer(
               builder: (_) {
-                return ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
+                return SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      primary: Theme.of(context).primaryColor,
+                      shadowColor: Theme.of(context).primaryColor.withAlpha(100),
                     ),
-                    primary: Theme.of(context).primaryColor,
-                    shadowColor: Theme.of(context).primaryColor.withAlpha(100),
-                  ),
-                  child: signInStore.loading
-                      ? CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation(Colors.white),
-                        )
-                      : Text(
-                          'sign-in'.i18n().toUpperCase(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                  onPressed: signInStore.isFormValid
-                      ? () async {
-                          await signInStore.signInWithEmailAndPassword();
-                          if (signInStore.signInError != "") {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text('${signInStore.signInError}'),
-                              backgroundColor: Colors.red,
-                              duration: Duration(milliseconds: 6000),
-                            ));
+                    child: signInStore.loading
+                        ? CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation(Colors.white),
+                          )
+                        : Text(
+                            'sign-in'.i18n().toUpperCase(),
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                    onPressed: signInStore.isFormValid
+                        ? () async {
+                            await signInStore.signInWithEmailAndPassword();
+                            if (signInStore.signInError != "") {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('${signInStore.signInError}'),
+                                backgroundColor: Colors.red,
+                                duration: Duration(milliseconds: 6000),
+                              ));
+                            }
                           }
-                        }
-                      : null,
+                        : null,
+                  ),
                 );
               },
+            ),
+            const SizedBox(
+              height: 16,
             ),
             Row(
               children: [
                 Observer(builder: (_) {
                   return SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.45,
+                    width: (MediaQuery.of(context).size.width - 48) * 0.5,
+                    height: 50,
                     child: SignInButton(
                       text: "sign-in-with-google".i18n().toUpperCase(),
                       loading: signInStore.loadingGoogle,
@@ -198,11 +207,12 @@ class SignInPageState extends State<SignInPage> {
                     ),
                   );
                 }),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.02,
+                const SizedBox(
+                  width: 16,
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.45,
+                  width: (MediaQuery.of(context).size.width - 48) * 0.5,
+                  height: 50,
                   child: SignInButton(
                     onPressed: () {},
                     text: "sign-in-with-facebook".i18n().toUpperCase(),
@@ -224,6 +234,7 @@ class SignInPageState extends State<SignInPage> {
                 ),
                 child: Text(
                   "dont-have-account-register".i18n().toUpperCase(),
+                  style: TextStyle(fontSize: 18),
                 ),
               ),
             ),
