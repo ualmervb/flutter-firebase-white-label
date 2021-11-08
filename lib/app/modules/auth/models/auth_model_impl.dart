@@ -20,7 +20,7 @@ class AuthModelImpl with AuthModel {
   Future<UserEntity?> currentUser() async{
     UserEntity? userEntity = await _authRepository.currentUser();
     if(userEntity != null){
-      userEntity = await _userRepository.loadUserWithEmailAndPassword(userEntity);
+      userEntity = await _userRepository.loadUser(userEntity);
     }
     return userEntity;
   }
@@ -28,7 +28,7 @@ class AuthModelImpl with AuthModel {
   @override
   Future<UserEntity?> signInWithEmailAndPassword(String email, String password) async {
     UserEntity? userEntity = await _authRepository.signInWithEmailAndPassword(email, password);
-    userEntity = await _userRepository.loadUserWithEmailAndPassword(userEntity!);
+    userEntity = await _userRepository.loadUser(userEntity!);
     return userEntity;
   }
 
@@ -48,8 +48,20 @@ class AuthModelImpl with AuthModel {
   }
 
   @override
-  Future<UserEntity?> signInWithGoogle() {
-    return _authRepository.signInWithGoogle();
+  Future<UserEntity?> signInWithGoogle() async{
+    UserEntity? userLogged = await  _authRepository.signInWithGoogle();
+
+    UserEntity? user = await _userRepository.loadUser(userLogged!);
+
+    print(user);
+
+    if(user == null || user.name == null){
+
+      await _userRepository.saveUser(userLogged);
+    }
+
+    return userLogged;
+
   }
 
 }

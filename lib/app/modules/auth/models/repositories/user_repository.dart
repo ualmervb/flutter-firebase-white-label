@@ -2,5 +2,5 @@ import 'package:flutter_firebase_white_label/app/modules/auth/models/entities/us
 
 abstract class UserRepository{
   Future<UserEntity?> saveUser(UserEntity userEntity);
-  Future<UserEntity?> loadUserWithEmailAndPassword(UserEntity userEntity);
+  Future<UserEntity?> loadUser(UserEntity userEntity);
 }

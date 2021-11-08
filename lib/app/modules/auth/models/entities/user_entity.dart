@@ -57,7 +57,6 @@ class UserEntity {
   UserEntity.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     email = json["email"];
-    password = json["password"];
     name = json["name"];
     phone = json["phone"];
     emailVerified = json["emailVerified"];
@@ -66,10 +65,8 @@ class UserEntity {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data["id"] = id;
     data["email"] = email;
-    data["password"] = password;
     data["name"] = name;
     data["phone"] = phone;
-    data["emailVerified"] = emailVerified;
     return data;
   }
 }

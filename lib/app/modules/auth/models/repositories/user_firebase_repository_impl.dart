@@ -10,7 +10,7 @@ class UserFirebaseRepositoryImpl with UserRepository{
   }
 
   @override
-  Future<UserEntity?> loadUserWithEmailAndPassword(UserEntity userEntity) async{
+  Future<UserEntity?> loadUser(UserEntity userEntity) async{
 
 
     final DocumentSnapshot docUser = await FirebaseFirestore.instance.collection("user").doc(userEntity.id).get();
