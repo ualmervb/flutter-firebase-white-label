@@ -8,4 +8,5 @@ abstract class AuthModel {
   Future<void> resendEmailVerification();
   Future<void> sendPasswordResetEmail(String email);
   Future<UserEntity?> signInWithGoogle();
+  Future<UserEntity?> signInWithFacebook();
 }

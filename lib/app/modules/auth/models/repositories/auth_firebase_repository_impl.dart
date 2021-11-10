@@ -1,3 +1,4 @@
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_firebase_white_label/app/modules/auth/models/entities/user_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -98,6 +99,26 @@ class AuthFirebaseRepositoryImpl with AuthRepository{
     }
     return currentUser;
 
+  }
+
+  @override
+  Future<UserEntity?> signInWithFacebook() async{
+    final facebookLoginResult = await FacebookAuth.instance.login();
+    final userData = await FacebookAuth.instance.getUserData();
+
+    final facebookAuthCredential = FacebookAuthProvider.credential(facebookLoginResult.accessToken!.token);
+    final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+    final User? currentUserFirebase = userCredential.user;
+
+    UserEntity? currentUser;
+    if (currentUserFirebase != null) {
+      currentUserFirebase.sendEmailVerification();
+      currentUser = UserEntity(
+          id: currentUserFirebase.uid,
+          email: currentUserFirebase.email,
+          emailVerified: currentUserFirebase.emailVerified);
+    }
+    return currentUser;
   }
 
 

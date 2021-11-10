@@ -64,4 +64,20 @@ class AuthModelImpl with AuthModel {
 
   }
 
+  @override
+  Future<UserEntity?> signInWithFacebook() async{
+    UserEntity? userLogged = await  _authRepository.signInWithFacebook();
+
+    UserEntity? user = await _userRepository.loadUser(userLogged!);
+
+    print(user);
+
+    if(user == null || user.name == null){
+
+      await _userRepository.saveUser(userLogged);
+    }
+
+    return userLogged;
+  }
+
 }

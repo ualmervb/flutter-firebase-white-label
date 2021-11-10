@@ -210,16 +210,26 @@ class SignInPageState extends State<SignInPage> {
                 const SizedBox(
                   width: 16,
                 ),
-                SizedBox(
+                Observer(builder: (_) {
+                  return SizedBox(
                   width: (MediaQuery.of(context).size.width - 48) * 0.5,
                   height: 50,
                   child: SignInButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await signInStore.signInWithFacebook();
+                      if (signInStore.signInError != "") {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('${signInStore.signInError}'),
+                          backgroundColor: Colors.red,
+                          duration: Duration(milliseconds: 6000),
+                        ));
+                      }
+                    },
                     text: "sign-in-with-facebook".i18n().toUpperCase(),
-                    loading: false,
+                    loading: signInStore.loadingFacebook,
                     signInButtonType: SignInButtonType.FACEBOOK,
                   ),
-                ),
+                );})
               ],
             ),
             Align(

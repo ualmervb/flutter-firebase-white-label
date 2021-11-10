@@ -39,6 +39,7 @@ dependencies:
   localization: ^1.1.0
   brasil_fields: ^1.2.0
   google_sign_in: ^5.2.1
+  flutter_facebook_auth: ^3.5.6
 
 dev_dependencies:
   modular_test: ^1.0.1+1

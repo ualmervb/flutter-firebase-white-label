@@ -46,6 +46,9 @@ abstract class _SignInStoreBase with Store {
   bool loadingGoogle = false;
 
   @observable
+  bool loadingFacebook = false;
+
+  @observable
   String signInError = "";
 
   @action
@@ -110,7 +113,6 @@ abstract class _SignInStoreBase with Store {
   @action
   Future<void> signInWithGoogle() async {
     loadingGoogle = false;
-    print("teste");
 
     try{
       loadingGoogle = true;
@@ -128,6 +130,31 @@ abstract class _SignInStoreBase with Store {
 
     } on FirebaseAuthException catch (e) {
       loadingGoogle = false;
+      setSignInError(getErrorString(e.code));
+    }
+
+  }
+
+  @action
+  Future<void> signInWithFacebook() async {
+    loadingGoogle = false;
+
+    try{
+      loadingFacebook = true;
+
+      UserEntity? _user =  await _authModel.signInWithFacebook();
+
+      loadingFacebook = false;
+
+      _authStore.setUserModel(_user!);
+      if(_user.emailVerified!){
+        Modular.to.pushReplacementNamed("/home/");
+      }else{
+        Modular.to.pushReplacementNamed("/auth/notEmailVerifying");
+      }
+
+    } on FirebaseAuthException catch (e) {
+      loadingFacebook = false;
       setSignInError(getErrorString(e.code));
     }
 
