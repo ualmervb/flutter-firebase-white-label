@@ -1,6 +1,4 @@
-import 'package:flutter_firebase_white_label/app/modules/auth/helpers/firebase_errors.dart';
-import 'package:flutter_firebase_white_label/app/modules/auth/models/auth_model.dart';
-import 'package:flutter_firebase_white_label/app/modules/auth/models/entities/user_entity.dart';
+import 'package:flutter_firebase_white_label/app/modules/auth/domain/errors/firebase_errors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,14 +18,7 @@ void main() async {
 
   test('click signIn', () async{
 
-    AuthModel auth = Modular.get();
 
-    try{
-      UserEntity? user = await auth.signInWithEmailAndPassword("ualmer@gmail.com", "123456");
-      print(user!.id);
-    }on FirebaseAuthException catch(e){
-      print(getErrorString(e.code));
-    }
   });
 
 }

@@ -1,6 +1,6 @@
+import 'package:flutter_firebase_white_label/app/modules/auth/presenter/pages/password_reset/passwordReset_store.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_firebase_white_label/app/modules/auth/sub_modules/password_reset/controllers/passwordReset_store.dart';
- 
+
 void main() {
   late PasswordResetStore store;
 

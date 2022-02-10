@@ -1,4 +1,4 @@
-import 'package:flutter_firebase_white_label/app/modules/auth/controllers/auth_store.dart';
+import 'package:flutter_firebase_white_label/app/modules/auth/presenter/pages/auth/auth_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
